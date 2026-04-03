@@ -3,7 +3,7 @@
 A sleek, modern, and cyberpunk-themed personal portfolio website built to showcase my skills, projects, and professional experience as a **Cybersecurity Analyst & Developer**.
 
 ## 🌐 Live Demo
-*If you have deployed the site, you can replace this text with your live URL (e.g., https://your-portfolio.vercel.app)*
+*https://advayacharya.vercel.app*
 
 ## 🚀 Features
 
