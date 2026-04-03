@@ -2275,3 +2275,46 @@ a, button, [role="button"] {
         font-size: 1.5rem;
     }
 }
+
+/* ===== CYBERSECURITY THEME MOBILE OVERRIDES ===== */
+@media (max-width: 768px) {
+    .hero-bottom {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .orbital-wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+
+    .projects-section,
+    .experience-section,
+    .skills-section,
+    .footer {
+        padding: 3rem 1rem !important;
+    }
+
+    .navbar {
+        flex-direction: column !important;
+        gap: 1rem !important;
+    }
+
+    .nav-left, .nav-right {
+        justify-content: center;
+        gap: 1.5rem !important;
+    }
+
+    .marquee-item {
+        font-size: 2rem !important;
+    }
+
+    .timeline-detail-card {
+        top: auto !important;
+        bottom: 2rem !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        width: auto !important;
+        transform: translateY(0) !important;
+    }
+}
