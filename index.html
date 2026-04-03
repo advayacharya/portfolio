@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advay Acharya - Cybersecurity Analyst & Developer</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+</head>
+
+<body>
+    <!-- Boot Screen -->
+    <div id="bootScreen" class="boot-screen">
+        <div class="boot-content">
+            <div id="bootText" class="boot-text"></div>
+            <div class="boot-cursor"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursorDot" class="cursor-dot"></div>
+
+    <!-- Background Surface Container -->
+    <div id="dotted-surface-container"></div>
+
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="content-wrapper" style="display: none;">
+
+        <!-- HERO SECTION -->
+        <header class="hero-section">
+            <nav class="navbar">
+                <div class="nav-left">
+                    <span class="scramble-text nav-title" data-text="PORTFOLIO v2.0"></span>
+                </div>
+                <div class="nav-right">
+                    <a href="https://github.com/advayacharya" target="_blank" rel="noopener noreferrer" class="nav-link scramble-text" data-text="GITHUB">GITHUB</a>
+                    <a href="https://www.linkedin.com/in/advay-acharya/" target="_blank" rel="noopener noreferrer" class="nav-link scramble-text" data-text="LINKEDIN">LINKEDIN</a>
+                </div>
+            </nav>
+
+            <div class="hero-content">
+                <div class="hero-main">
+                    <h1 class="hero-title reveal-on-load">
+                        <span class="word scramble-text" data-text="ADVAY">ADVAY</span><br>
+                        <span class="word scramble-text accent" data-text="ACHARYA">ACHARYA</span>
+                    </h1>
+
+                    <div class="hero-bottom reveal-on-load" style="animation-delay: 0.3s;">
+                        <p class="hero-description">
+                            <strong>Cybersecurity Analyst & Developer.</strong> Translating complex vulnerabilities into
+                            actionable defenses and building secure, performant software architecture.
+                        </p>
+
+                        <div class="hero-meta">
+                            <div class="meta-line">STATUS: AVAILABLE FOR HIRE</div>
+                            <div class="meta-line">LOC: BENGALURU, KARNATAKA</div>
+                            <div class="meta-line"><span class="status-dot"></span> SYSTEM SECURE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- MARQUEE DIVIDER -->
+        <div class="marquee-section">
+            <div class="marquee-content">
+                <div class="marquee-item">MALWARE ANALYSIS <span class="accent-dot">•</span> THREAT DETECTION <span
+                        class="accent-dot">•</span> SECURE ARCHITECTURE <span class="accent-dot">•</span> DATA
+                    ENCRYPTION <span class="accent-dot">•</span></div>
+                <div class="marquee-item">MALWARE ANALYSIS <span class="accent-dot">•</span> THREAT DETECTION <span
+                        class="accent-dot">•</span> SECURE ARCHITECTURE <span class="accent-dot">•</span> DATA
+                    ENCRYPTION <span class="accent-dot">•</span></div>
+            </div>
+        </div>
+
+        <!-- PROJECTS ORBITAL TIMELINE SECTION -->
+        <section class="projects-section">
+            <div class="container">
+                <div class="section-header reveal-section">
+                    <div class="section-label">
+                        <span class="label-line"></span>
+                        <span class="label-text">01 // RADIAL TIMELINE</span>
+                    </div>
+                    <h2 class="section-title">Project Evolution &<br>Timeline</h2>
+                    <p class="section-meta">Click any node in the orbital timeline to explore project details, tech
+                        stack, and connection relationships.</p>
+                </div>
+
+                <!-- Radial Orbital Timeline Container -->
+                <div class="timeline-wrapper reveal-section">
+                    <div id="timelineContainer" class="timeline-container">
+                        <!-- Central Orbital Hub -->
+                        <div class="orbital-hub">
+                            <div class="hub-pulses">
+                                <div class="pulse-ring pulse-1"></div>
+                                <div class="pulse-ring pulse-2"></div>
+                                <div class="pulse-ring pulse-3"></div>
+                            </div>
+                            <div class="hub-core">
+                                <div class="hub-inner"></div>
+                            </div>
+                        </div>
+
+                        <!-- Orbital Ring Reference -->
+                        <div class="orbital-ring"></div>
+
+                        <!-- Timeline Nodes Container -->
+                        <div id="timelineNodesContainer" class="timeline-nodes"></div>
+
+                        <!-- Timeline Detail Card -->
+                        <div id="timelineDetailCard" class="timeline-detail-card"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="experience-section">
+            <div class="container">
+                <div class="section-header reveal-section">
+                    <div class="section-label">
+                        <span class="label-line"></span>
+                        <span class="label-text">02 // PROFESSIONAL EXPERIENCE</span>
+                    </div>
+                </div>
+
+                <div class="experience-content reveal-section">
+                    <div class="exp-header">
+                        <h3 class="exp-company">Intelliroot</h3>
+                        <span class="exp-role">Cybersecurity Analyst Intern</span>
+                        <span class="exp-meta">12/2025 - 02/2026 | Bengaluru, Karnataka</span>
+                    </div>
+                    <div class="exp-details">
+                        <p class="exp-comment">/* Primary focus on building automated analysis tools and reducing triage
+                            timelines via API integrations. */</p>
+                        <ul class="exp-points">
+                            <li>Developed a Python-based malware analysis tool supporting PE, APK, PDF, RTF, and Office
+                                documents by integrating oletools, Androguard, pikepdf, ViperMonkey, Docker,
+                                pytesseract, and pdf2image.</li>
+                            <li>Engineered a custom risk scoring algorithm evaluating 15+ security indicators (including
+                                high entropy sections and YARA matches) to generate comprehensive 5-section threat
+                                reports.</li>
+                            <li>Reduced manual triage time by automating IOC extraction and integrating Docker,
+                                ViperMonkey, Tesseract, and MalwareBazaar for rapid threat detection.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS & CERTIFICATIONS SECTION -->
+        <section class="skills-section">
+            <div class="container">
+                <div class="skills-grid">
+                    <!-- Technical Arsenal -->
+                    <div class="skill-column reveal-section">
+                        <div class="section-label">
+                            <span class="label-line"></span>
+                            <span class="label-text">03 // TECHNICAL ARSENAL</span>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-category-title">PROGRAMMING LANGUAGES</div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">C</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">UNIX Shell</span>
+                                <span class="skill-tag">SQLplus</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">Python</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-group">
+                            <div class="skill-category-title">CYBERSECURITY</div>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Wireshark</span>
+                                <span class="skill-tag">Log Analysis</span>
+                                <span class="skill-tag">Oletools</span>
+                                <span class="skill-tag">Androguard</span>
+                                <span class="skill-tag">YARA Rules</span>
+                                <span class="skill-tag">Threat Detection</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Certifications -->
+                    <div class="certifications-column reveal-section">
+                        <div class="section-label">
+                            <span class="label-line"></span>
+                            <span class="label-text">04 // CERTIFICATIONS</span>
+                        </div>
+
+                        <div class="cert-card">
+                            <h3 class="cert-title">Google Cybersecurity Professional Certificate</h3>
+                            <p class="cert-details">90+ hours training: Risk management, networks, Linux/SQL, asset
+                                threats/vulnerabilities, detection & response, Python automation. Completed 8 core
+                                courses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-content reveal-section">
+                <p class="footer-label">Initiate Secure Transmission</p>
+                <a href="mailto:acharyaadvay16@gmail.com" class="magnetic-button">
+                    <h2>LET'S TALK</h2>
+                </a>
+
+                <div class="footer-links">
+                    <a href="mailto:acharyaadvay16@gmail.com" class="footer-link">✉ Email</a>
+                    <a href="https://github.com/advayacharya" target="_blank" rel="noopener noreferrer" class="footer-link">⚙ GitHub</a>
+                    <a href="https://www.linkedin.com/in/advay-acharya/" target="_blank" rel="noopener noreferrer" class="footer-link">💼 LinkedIn</a>
+                </div>
+
+                <p class="footer-copyright">© 2026 ADVAY ACHARYA. ALL SYSTEMS NOMINAL.</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
