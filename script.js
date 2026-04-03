@@ -7,7 +7,7 @@ const TIMELINE_DATA = [
         content: "Python-based malware analysis tool supporting 5+ file formats. Integrates static (oletools, Androguard), dynamic (ViperMonkey, Docker), and visual (Tesseract) analysis engines with a custom risk scoring algorithm evaluating 15+ security indicators.",
         category: "Internship",
         type: "IN PROGRESS",
-        relatedIds: [2, 3],
+        relatedIds: [2, 3, 4],
         status: "in-progress",
         energy: 85,
         icon: "🛡️",
@@ -40,6 +40,20 @@ const TIMELINE_DATA = [
         energy: 100,
         icon: "🌐",
         tech: ["Wireshark", "Python", "Networking", "KML", "GeoIP"]
+    },
+    {
+        id: 4,
+        title: "PassIntel Security Analyzer",
+        date: "Early 2025",
+        content: "Gamified, client-side password strength tester. Calculates real-time entropy and brute-force limits via visual character heatmaps. Features animated 'monster' judges and hidden security easter eggs.",
+        category: "Personal Project",
+        type: "COMPLETE",
+        relatedIds: [],
+        externalLink: "https://passintel.netlify.app/",
+        status: "completed",
+        energy: 100,
+        icon: "👾",
+        tech: ["JavaScript", "Gamification", "Security Education", "DOM Animation"]
     }
 ];
 
