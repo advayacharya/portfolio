@@ -11,7 +11,8 @@ const TIMELINE_DATA = [
         status: "in-progress",
         energy: 85,
         icon: "🛡️",
-        tech: ["Python", "Docker", "YARA", "Tesseract", "oletools", "ViperMonkey"]
+        tech: ["Python", "Docker", "YARA", "Tesseract", "oletools", "ViperMonkey"],
+        orbit: 1
     },
     {
         id: 2,
@@ -25,7 +26,8 @@ const TIMELINE_DATA = [
         status: "completed",
         energy: 100,
         icon: "🔐",
-        tech: ["AES-256", "Steganography", "Cryptography", "PBKDF2"]
+        tech: ["AES-256", "Steganography", "Cryptography", "PBKDF2"],
+        orbit: 1
     },
     {
         id: 3,
@@ -39,7 +41,8 @@ const TIMELINE_DATA = [
         status: "completed",
         energy: 100,
         icon: "🌐",
-        tech: ["Wireshark", "Python", "Networking", "KML", "GeoIP"]
+        tech: ["Wireshark", "Python", "Networking", "KML", "GeoIP"],
+        orbit: 1
     },
     {
         id: 4,
@@ -53,7 +56,38 @@ const TIMELINE_DATA = [
         status: "completed",
         energy: 100,
         icon: "👾",
-        tech: ["JavaScript", "Gamification", "Security Education", "DOM Animation"]
+        tech: ["JavaScript", "Gamification", "Security Education", "DOM Animation"],
+        orbit: 1
+    },
+    {
+        id: 5,
+        title: "Forensic Unit | Expose & Erase",
+        date: "2026",
+        content: "Zero-Trust client-side EXIF metadata stripper. Identifies (exposes) and removes (erases) sensitive hidden metadata (GPS, camera settings, timestamps) locally in the browser, ensuring data privacy.",
+        category: "Security Tool",
+        type: "NEW",
+        relatedIds: [1],
+        externalLink: "https://pixelscrub.vercel.app/",
+        status: "completed",
+        energy: 100,
+        icon: "🕵️‍♂️",
+        tech: ["React", "Tailwind CSS", "ExifReader", "Canvas API"],
+        orbit: 2
+    },
+    {
+        id: 6,
+        title: "Control Mapping Engine",
+        date: "2026",
+        content: "Professional GRC dashboard (Sovereign Ledger) visualizing security control mappings across ISO 27001, SOC 2, and GDPR. Features interactive network graphs and high-end architectural UI layering.",
+        category: "Compliance",
+        type: "NEW",
+        relatedIds: [1, 5],
+        externalLink: "https://controlcross.vercel.app/",
+        status: "completed",
+        energy: 100,
+        icon: "⚖️",
+        tech: ["React", "Vite", "Tailwind CSS", "D3.js"],
+        orbit: 2
     }
 ];
 
@@ -163,7 +197,7 @@ function initRadialOrbitalTimeline() {
     
     // Setup container click handler
     container.addEventListener('click', (e) => {
-        if (e.target === container || e.target === nodesContainer) {
+        if (e.target === container || e.target === nodesContainer || e.target.classList.contains('dynamic-orbital-ring')) {
             timelineState.expandedItems = {};
             timelineState.activeNodeId = null;
             timelineState.pulseEffect = {};
@@ -172,23 +206,48 @@ function initRadialOrbitalTimeline() {
             updateTimelineNodes();
         }
     });
+
+    // Determine unique orbits and base radius
+    const uniqueOrbits = [...new Set(TIMELINE_DATA.map(item => item.orbit))].sort();
+    const baseRadius = Math.min(container.offsetWidth, container.offsetHeight) * 0.25;
+
+    // Create Dynamic Orbital Rings
+    // Clear existing rings if any (in case of re-init)
+    const existingRings = container.querySelectorAll('.dynamic-orbital-ring');
+    existingRings.forEach(ring => ring.remove());
+
+    uniqueOrbits.forEach(orbitLevel => {
+        const ring = document.createElement('div');
+        ring.className = 'dynamic-orbital-ring';
+        const orbitRadius = baseRadius * (orbitLevel + 0.3); // Scale radius for each orbit
+        
+        ring.style.width = (orbitRadius * 2) + 'px';
+        ring.style.height = (orbitRadius * 2) + 'px';
+        container.appendChild(ring);
+    });
     
     // Create timeline nodes
     nodesContainer.innerHTML = ''; // reset
-    const radius = Math.min(container.offsetWidth, container.offsetHeight) * 0.35;
 
     TIMELINE_DATA.forEach((item, index) => {
-        const angle = ((index / TIMELINE_DATA.length) * 360 + timelineState.rotationAngle) % 360;
+        // Find items in the same orbit to calculate correct spacing
+        const sameOrbitItems = TIMELINE_DATA.filter(d => d.orbit === item.orbit);
+        const itemIndexInOrbit = sameOrbitItems.indexOf(item);
+        const orbitLevel = item.orbit;
+        
+        const orbitRadius = baseRadius * (orbitLevel + 0.3);
+        const angle = ((itemIndexInOrbit / sameOrbitItems.length) * 360 + (timelineState.rotationAngle * (1 / orbitLevel))) % 360;
         const radian = (angle * Math.PI) / 180;
 
-        const x = radius * Math.cos(radian) + container.offsetWidth / 2;
-        const y = radius * Math.sin(radian) + container.offsetHeight / 2;
+        const x = orbitRadius * Math.cos(radian) + container.offsetWidth / 2;
+        const y = orbitRadius * Math.sin(radian) + container.offsetHeight / 2;
 
         const nodeEl = document.createElement('div');
         nodeEl.className = 'timeline-node';
         nodeEl.style.left = x + 'px';
         nodeEl.style.top = y + 'px';
         nodeEl.dataset.id = item.id;
+        nodeEl.dataset.orbit = item.orbit;
 
         nodeEl.innerHTML = `
             <div class="node-aura"></div>
@@ -213,14 +272,22 @@ function setTimelineNodesPosition() {
     const nodesContainer = document.getElementById('timelineNodesContainer');
     if (!container || !nodesContainer) return;
 
-    const radius = Math.min(container.offsetWidth, container.offsetHeight) * 0.35;
+    const baseRadius = Math.min(container.offsetWidth, container.offsetHeight) * 0.25;
 
-    nodesContainer.querySelectorAll('.timeline-node').forEach((nodeEl, index) => {
-        const angle = ((index / TIMELINE_DATA.length) * 360 + timelineState.rotationAngle) % 360;
+    nodesContainer.querySelectorAll('.timeline-node').forEach((nodeEl) => {
+        const id = parseInt(nodeEl.dataset.id);
+        const item = TIMELINE_DATA.find(d => d.id === id);
+        const orbitLevel = item.orbit;
+        const sameOrbitItems = TIMELINE_DATA.filter(d => d.orbit === orbitLevel);
+        const itemIndexInOrbit = sameOrbitItems.indexOf(item);
+        
+        const orbitRadius = baseRadius * (orbitLevel + 0.3);
+        // Inner orbits rotate faster, outer slower for visual depth
+        const angle = ((itemIndexInOrbit / sameOrbitItems.length) * 360 + (timelineState.rotationAngle * (1 / orbitLevel))) % 360;
         const radian = (angle * Math.PI) / 180;
 
-        const x = radius * Math.cos(radian) + container.offsetWidth / 2;
-        const y = radius * Math.sin(radian) + container.offsetHeight / 2;
+        const x = orbitRadius * Math.cos(radian) + container.offsetWidth / 2;
+        const y = orbitRadius * Math.sin(radian) + container.offsetHeight / 2;
 
         nodeEl.style.left = x + 'px';
         nodeEl.style.top = y + 'px';
@@ -275,16 +342,21 @@ function displayTimelineDetail(item) {
     const container = document.getElementById('timelineContainer');
     
     // Calculate position relative to the node
-    const angle = ((TIMELINE_DATA.indexOf(item) / TIMELINE_DATA.length) * 360 + timelineState.rotationAngle) % 360;
+    const sameOrbitItems = TIMELINE_DATA.filter(d => d.orbit === item.orbit);
+    const itemIndexInOrbit = sameOrbitItems.indexOf(item);
+    const orbitLevel = item.orbit;
+    const baseRadius = Math.min(container.offsetWidth, container.offsetHeight) * 0.25;
+    const orbitRadius = baseRadius * (orbitLevel + 0.3);
+    
+    const angle = ((itemIndexInOrbit / sameOrbitItems.length) * 360 + (timelineState.rotationAngle * (1 / orbitLevel))) % 360;
     const radian = (angle * Math.PI) / 180;
-    const radius = 200;
     
-    const x = radius * Math.cos(radian) + container.offsetWidth / 2;
-    const y = radius * Math.sin(radian) + container.offsetHeight / 2;
+    const x = orbitRadius * Math.cos(radian) + container.offsetWidth / 2;
+    const y = orbitRadius * Math.sin(radian) + container.offsetHeight / 2;
     
-    // Adjust card position to appear above the node
+    // Adjust card position to appear above/near the node
     detailCard.style.left = x + 'px';
-    detailCard.style.top = (y - 100) + 'px';
+    detailCard.style.top = (y - 120) + 'px';
     
     const statusBadgeClass = item.status === 'completed' ? 'completed' : 
                              item.status === 'in-progress' ? 'in-progress' : 'pending';
